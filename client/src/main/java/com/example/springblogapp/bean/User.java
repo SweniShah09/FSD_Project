@@ -7,27 +7,29 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
-@Table(name = "posts")
-@AllArgsConstructor
+@Table(name ="users")
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
-public class Post {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
     @Column
-    String title;
+    private String name;
     @Column
-    String description;
+    private String password;
 
-    @OneToMany(mappedBy = "post")
-    List<Comment> comments = new ArrayList<>();
+    @OneToMany(mappedBy = "users")
+    List<Post> posts = new ArrayList<>();
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User users;
+    @OneToMany(mappedBy = "users")
+    private List<Comment> comments = new ArrayList<>();
+
 }
