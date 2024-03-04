@@ -1,6 +1,10 @@
 package com.example.springblogapp.controller;
 
+import com.example.springblogapp.bean.Comment;
 import com.example.springblogapp.bean.Post;
+import com.example.springblogapp.dao.CategoryDao;
+import com.example.springblogapp.dao.PostDao;
+import com.example.springblogapp.dao.UserDao;
 import com.example.springblogapp.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,9 +17,9 @@ import java.util.List;
 public class PostController {
     @Autowired
     private PostService postService;
-    @PostMapping("/createPost")
-    public ResponseEntity<String> createPost(@RequestBody Post post){
-        Post response = postService.createPost(post);
+    @PostMapping("/user/{userId}/category/{catId}/createPost")
+    public ResponseEntity<String> createPost(@RequestBody Post post, @PathVariable Long userId,@PathVariable Long catId){
+        Post response = postService.createPost(post, userId, catId);
         return new ResponseEntity<>("Post created Successfully, ID ->" +response.getId(), HttpStatus.CREATED);
     }
     @GetMapping("/getPost/{id}")
@@ -23,9 +27,13 @@ public class PostController {
         Post response = postService.getPostById(id);
         return ResponseEntity.ok(response);
     }
-    @GetMapping("/getPost")
-    public List<Post> getAllPost(){
-        return postService.getAllPost();
+    @GetMapping("/category/{id}/getPosts")
+    public List<Post> getAllPostByCategoryId(@PathVariable Long id) {
+        return postService.getAllPostByCategoryId(id);
+    }
+    @GetMapping("/user/{id}/getPosts")
+    public List<Post> getAllPostByUserId(@PathVariable Long id) {
+        return postService.getAllPostByUserId(id);
     }
 
     @PutMapping("/updatePost/{id}")

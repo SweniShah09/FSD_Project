@@ -4,12 +4,16 @@ import com.example.springblogapp.bean.Comment;
 import com.example.springblogapp.bean.Post;
 import com.example.springblogapp.dao.CommentDao;
 import com.example.springblogapp.dao.PostDao;
+import com.example.springblogapp.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
 public class CommentService {
+    @Autowired
+    private UserDao userDao;
+
     @Autowired
     private PostDao postDAO;
 
