@@ -24,19 +24,9 @@ public class Post {
     String title;
     @Column
     String description;
-    @Column
-    String imageName;
-    @Column
-    Date addDate;
 
     @OneToMany(mappedBy = "post")
     List<Comment> comments = new ArrayList<>();
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User users;
 
-    @ManyToOne
-    @JoinColumn(name = "cat_id")
-    private Category category;
 }
