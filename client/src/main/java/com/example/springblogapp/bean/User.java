@@ -25,7 +25,8 @@ public class User {
     private String name;
     @Column
     private String password;
-
+    @Column
+    private String email;
     @OneToMany(mappedBy = "users")
     List<Post> posts = new ArrayList<>();
 

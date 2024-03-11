@@ -7,6 +7,8 @@ import com.example.springblogapp.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.naming.AuthenticationException;
+import javax.naming.AuthenticationNotSupportedException;
 import java.util.List;
 @Service
 public class UserService {
@@ -14,6 +16,7 @@ public class UserService {
     private UserDao userDao;
 
     public User createUser(User user){
+
         return userDao.save(user);
     }
 
@@ -45,6 +48,14 @@ public class UserService {
             throw  new RuntimeException(id+ "->This Id does not Exists");
         }
     }
+    public User authenticateUser(Long id, String password) {
+        User user = userDao.findById(id).orElseThrow(() -> new RuntimeException("User not found with id " + id));
+        if (!user.getPassword().equals(password)) {
+            throw new RuntimeException("password incorrect");
+        }
+        return user;
+    }
+
 }
 
 

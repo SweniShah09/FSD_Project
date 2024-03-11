@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin
 @RestController
 public class UserController {
     @Autowired
@@ -38,4 +38,11 @@ public class UserController {
         userService.deleteUserById(id);
         return new ResponseEntity<>("Post deleted Successfully.", HttpStatus.OK);
     }
+
+    @PostMapping("/login")
+    public ResponseEntity<User> loginUser(@RequestBody User user) {
+        User authenticatedUser = userService.authenticateUser(user.getId(), user.getPassword());
+        return ResponseEntity.ok(authenticatedUser);
+    }
+
 }
