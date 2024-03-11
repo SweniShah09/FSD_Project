@@ -49,14 +49,15 @@
   }
   
   .registerLoginButton {
-    position: absolute;
+    /* position: absolute;
     top: 60px;
-    right: 20px;
+    right: 20px; */
     background-color: lightcoral;
     cursor: pointer;
     padding: 10px;
     border: none;
     color: white;
     border-radius: 10px;
+    width: 50px;
   }
   

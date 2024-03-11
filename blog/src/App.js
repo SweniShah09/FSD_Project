@@ -17,9 +17,9 @@ function App() {
         <Topbar/>
         <Routes>
           <Route path="/" exact element={<HomePage/>}></Route> 
-          <Route path="/register" element={user ? <HomePage/> : <Register />} ></Route>
-          <Route path="/login" element={user ? <HomePage/> : <Login />} ></Route>
-          <Route path="/write" element={user ? <Write /> : <Register />} ></Route>
+          <Route path="/register" element={ <Register />} ></Route>
+          <Route path="/login" element={ <Login />} ></Route>
+          <Route path="/write" element={ <Write />} ></Route>
           <Route path="/settings" element={user ? <Settings /> : <Register/>} ></Route>
           <Route path="/post/:postId" element={<Single />} ></Route> 
         </Routes>

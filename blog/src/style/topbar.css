@@ -33,6 +33,7 @@
     margin: 0;
     padding: 0;
     list-style: none;
+    color: #444;
   }
   
   .topListItem {
@@ -40,6 +41,7 @@
     font-size: 18px;
     font-weight: 300;
     cursor: pointer;
+    color: #444;
   }
   
   .topListItem:hover{

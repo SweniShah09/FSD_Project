@@ -4,9 +4,16 @@ import { FaFacebookSquare } from "react-icons/fa";
 import { SlSocialTwitter } from "react-icons/sl";
 import { FaPinterest } from "react-icons/fa";
 import { FaInstagramSquare } from "react-icons/fa";
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 export default function Topbar() {
-  const user = true; 
+  const user = true;
+  const navigate = useNavigate();
+  const handlelogin=()=>{
+    navigate('/login')
+  } 
+  const handleregister=()=>{
+    navigate('/register')
+  }
   return (
     <div className="top">
     <div className="topLeft">
@@ -33,7 +40,7 @@ export default function Topbar() {
         </ul>
       </div>
       <div className="topRight">
-        {user ? (
+        
           <Link className="link" to="/settings">
             <img
               className="topImg"
@@ -41,20 +48,15 @@ export default function Topbar() {
               alt=""
             />
           </Link>
-        ) : (
+        
           <ul className="topList">
-            <li className="topListItem">
-              <Link className="link" to="/login">
+            <li className="topListItem" onClick={handlelogin}>
                 LOGIN
-              </Link>
             </li>
-            <li className="topListItem">
-              <Link className="link" to="/register">
-                REGISTER
-              </Link>
+            <li className="topListItem" on onClick={handleregister}>
+              REGISTER
             </li>
           </ul>
-        )}
 
     </div>
     </div>
