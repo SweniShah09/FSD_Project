@@ -1,7 +1,6 @@
 package com.example.springblogapp.controller;
 
 import com.example.springblogapp.bean.Comment;
-import com.example.springblogapp.dao.CommentDao;
 import com.example.springblogapp.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -48,4 +47,5 @@ public class CommentController {
 
         return new ResponseEntity<>("Comment deleted successfully.", HttpStatus.OK);
     }
+
 }
