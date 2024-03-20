@@ -24,19 +24,15 @@ public class Post {
     String title;
     @Column
     String description;
-    @Column
-    String imageName;
-    @Column
-    Date addDate;
 
-    @OneToMany(mappedBy = "post")
-    List<Comment> comments = new ArrayList<>();
+    private String postedBy;
+    private String img;
+    private Date date;
+    private int likeCount;
+    private int viewCount;
+   // private List<String> tags;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User users;
 
-    @ManyToOne
-    @JoinColumn(name = "cat_id")
-    private Category category;
+
+
 }

@@ -1,5 +1,6 @@
 package com.example.springblogapp.bean;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,16 +21,13 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column
-    private String name;
-    @Column
-    private String email;
+    private String postedBy;
     @Column
     private String comment;
+
+    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "post_id")
+    @JoinColumn(name = "post_id", nullable = false)
     private Post post;
 
-    @ManyToOne
-    @JoinColumn(name = "users_id")
-    private User users;
 }

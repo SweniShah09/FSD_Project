@@ -14,7 +14,8 @@ import java.util.List;
 public class UserService {
     @Autowired
     private UserDao userDao;
-
+    @Autowired
+    private PostDao postDao;
     public User createUser(User user){
 
         return userDao.save(user);

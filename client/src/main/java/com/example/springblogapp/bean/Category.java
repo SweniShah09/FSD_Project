@@ -14,13 +14,12 @@ import java.util.List;
 @Getter
 @Setter
 public class Category {
-    @Id@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column
     private String categoryTitle;
     @Column
     private String categoryDescription;
 
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
-    private List<Post> posts = new ArrayList<>();
 }

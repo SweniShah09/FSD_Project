@@ -1,5 +1,6 @@
 package com.example.springblogapp.controller;
 
+import com.example.springblogapp.bean.Post;
 import com.example.springblogapp.bean.User;
 import com.example.springblogapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

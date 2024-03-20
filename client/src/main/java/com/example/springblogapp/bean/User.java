@@ -17,6 +17,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Getter
 @Setter
+
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,7 +28,8 @@ public class User {
     private String password;
     @Column
     private String email;
-    @OneToMany(mappedBy = "users")
+
+    @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
     List<Post> posts = new ArrayList<>();
 
     @OneToMany(mappedBy = "users")
