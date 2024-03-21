@@ -85,7 +85,7 @@ export default function ViewAllPost() {
         try {
             const response = await axios.put(`http://localhost:8080/api/posts/${id}/like`);
             const updatedPosts = posts.map((post) =>
-                post.id === id ? { ...post, likes: response.data.likes } : post
+                post.id === id ? { ...post, like_count: response.data.like_count } : post
             );
             setPosts(updatedPosts);
             
@@ -123,7 +123,7 @@ export default function ViewAllPost() {
                         <IconButton aria-label="add to favorites" onClick={() => handleLikeClick(post.id)}>
                             <FavoriteIcon />
                             <Typography variant="body2" color="text.secondary" style={{ marginLeft: '4px' }}>
-                                {post.likes}
+                                {post.likeCount}
                             </Typography>
                             </IconButton>
                         <IconButton >

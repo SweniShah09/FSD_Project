@@ -16,19 +16,18 @@ import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import CommentForm from './comment';
 const ViewPost = () => {
   const { id } = useParams();
   const [post, setPost] = useState(null);
-  const [comment, setComment] = useState('');
-  const [comments, setComments] = useState([]);
-  const [postedBy,setPostedBy] = useState('');
-  const [postId,setPostId] = useState('');
+  const [postId, setPostId] = useState('');
+  const [postedBy, setPostedBy] = useState('');
+  const [comment, setComment] = useState([]);
   useEffect(() => {
     const fetchPost = async () => {
       try {
         const response = await axios.get(`http://localhost:8080/api/posts/`+id);
         setPost(response.data);
-        setComments(response.data.comments || []);
       } catch (error) {
         console.error('Error fetching post:', error);
       }
@@ -36,24 +35,36 @@ const ViewPost = () => {
 
     fetchPost();
   }, [id]);
-  const commentData ={
-    comment,
-  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8080/api/comments/create', {
-        id: post.id, 
-        postedBy: postedBy,
-        comment: comment
+      await axios.post('http://localhost:8080/api/comments/create', {
+        id,
+        postedBy,
+        comment        
       });
-      setComments([...comments, response.data]);
+      setPostedBy('');
       setComment('');
+      // You may want to fetch the updated comments here
     } catch (error) {
-      console.error('Error creating comment:', error);
+      console.error('Error adding comment:', error);
     }
   };
+  const [comments, setComments] = useState([]);
+
+  useEffect(() => {
+    const fetchComments = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8080/api/comments/${id}`);
+        setComments(response.data);
+      } catch (error) {
+        console.error('Error fetching comments:', error);
+      }
+    };
+
+    fetchComments();
+  }, [id]);
 
   return (
     <Card>
@@ -64,15 +75,7 @@ const ViewPost = () => {
             <Typography variant="body1">{post.description}</Typography>
             <Typography variant="body2">Posted By: {post.postedBy}</Typography>
             <Typography variant="h5">Create Comment</Typography>
-            <form onSubmit={handleSubmit}>
-            <TextField
-                label="Post Id"
-                type="text"
-                value={postId}
-                onChange={(e) => setPostId(e.target.value)}
-                required
-                margin="normal"
-              /><br/>
+            {/* <form onSubmit={handleSubmit}>
             <TextField
                 label="Posted By"
                 type="text"
@@ -93,14 +96,14 @@ const ViewPost = () => {
               <Button type="submit" variant="contained" color="primary">
                 Submit
               </Button>
-            </form>
-
+            </form> */}
+            <CommentForm/>
             <Typography variant="h5">Comments</Typography>
-            {comments.map((c, index) => (
-              <Typography key={index} variant="body2">
-                <strong>{c.postedBy}</strong>: {c.comment}
-              </Typography>
-            ))}
+            {comments.map((comment) => (
+        <div key={comment.id}>
+          <p>{comment.content}</p>
+        </div>
+      ))}
           </>
         ) : (
           <Typography>Loading...</Typography>
